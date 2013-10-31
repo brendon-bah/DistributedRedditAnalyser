@@ -1,15 +1,5 @@
 package distributedRedditAnalyser.bolt;
 
-import java.util.Map;
-
-import weka.core.Instances;
-import weka.core.SparseInstance;
-
-import moa.classifiers.Classifier;
-import moa.classifiers.meta.OzaBoost;
-import moa.core.InstancesHeader;
-import moa.options.ClassOption;
-
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -17,6 +7,14 @@ import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
+import moa.classifiers.Classifier;
+import moa.classifiers.meta.OzaBoost;
+import moa.core.InstancesHeader;
+import moa.options.ClassOption;
+import weka.core.Instances;
+import weka.core.SparseInstance;
+
+import java.util.Map;
 
 /**
  * 
@@ -49,7 +47,7 @@ public class OzaBoostBolt extends BaseRichBolt {
 	public void execute(Tuple input) {
 		
 		Object obj = input.getValue(0);
-		
+
 		//If we get the headers set them and reset
 		if(obj.getClass() == Instances.class){
 			INST_HEADERS = new InstancesHeader((Instances) obj);
